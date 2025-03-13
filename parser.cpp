@@ -25,16 +25,17 @@ Parser::Parser(Scanner& scanner) : scanner(scanner), lastLabel(-1), IR() {
 */
 void Parser::parse(const std::string& inputFileName) 
 {
+    std::cout << "Compiling " << inputFileName << "..." << std::endl;
     try{
         program();
         if (lookahead.type != "endSym") {
             error("Expected end. but found " + lookahead.type);
         }
-        std::cout << "Successfully parsed!" << std::endl;
+        std::cout << "Success!" << std::endl;
 
         std::string outputFileName = inputFileName + ".txt";
         printRPN(outputFileName);
-        
+
     }catch (const std::exception& e){
         std::cerr << "parsing error: " << e.what() << std::endl;
     }
@@ -371,16 +372,6 @@ void Parser::printRPN(const std::string& outputFileName)
 
     outputFile.close();
     std::cout << "Generated RPN code written to " << outputFileName << std::endl;
-
-    // std::cout << "Printing RPN..." << std::endl;
-    // for(const auto& x : IR)
-    // {
-    //     if(x.second.empty()){
-    //         std::cout << "['" << x.first << "']" << std::endl;
-    //     }else{
-    //         std::cout << "['" << x.first << ", '" << x.second << "']" << std::endl;
-    //     }
-    // }
 }
 
 
