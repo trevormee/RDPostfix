@@ -208,19 +208,6 @@ void Parser::factor()
 
 
 /*
-    @brief prints the identifiers used in a valid input file
-    @return N/A
-*/
-void Parser::printIdentifiers()
-{
-    std::cout << "Identifiers used in the program:" << std::endl;
-    for(const auto& id: symbolTable) {
-        std::cout << id << std::endl;
-    }
-}
-
-
-/*
     @brief Create distinct symbolic labels L0, L1, etc
     @return the new label
 */
