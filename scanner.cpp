@@ -1,7 +1,7 @@
 /***************************************************************
  *  Student Name: Trevor Mee
  *  File Name: scanner.cpp
- *  Project 1
+ *  Project 2
  * 
  *  @brief This file contains the initialization of the scanner class
  *         and the implementation of the scanner functions.

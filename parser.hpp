@@ -1,10 +1,11 @@
 /***************************************************************
   Student Name: Trevor Mee
-  File Name: main.cpp
-  Project 1
+  File Name: parser.hpp
+  Project 2
 
   @brief Contains the member function declarations for parsing
-         an input source.
+         an input source and generating RPN code to an output 
+         file
 ***************************************************************/
 
 #include "scanner.hpp"
@@ -28,8 +29,6 @@ private:
     Scanner& scanner;
     Token lookahead;
     std::unordered_set<std::string> symbolTable;
-
-    // new variables
     int lastLabel;
     std::vector<std::pair<std::string, std::string>> IR;
     std::unordered_map<std::string, std::string> opMap {
@@ -50,8 +49,6 @@ private:
     void term();
     void factor();
     void printIdentifiers();
-
-    // new functions
     std::string newLabel();
     void emit(const std::string& tag, const std::string& item );
     void scan();

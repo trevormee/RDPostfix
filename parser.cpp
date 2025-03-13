@@ -1,10 +1,11 @@
 /***************************************************************
   Student Name: Trevor Mee
   File Name: parser.cpp
-  Project 1
+  Project 2
 
   @brief Contains the member function definitions for parsing
-         an input source.
+         an input source and generating its RPN code to an 
+         output file
 ***************************************************************/
 
 #include "parser.hpp"

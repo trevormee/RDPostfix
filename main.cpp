@@ -1,11 +1,11 @@
 /***************************************************************
   Student Name: Trevor Mee
   File Name: main.cpp
-  Project 1
+  Project 2
 
-  @brief Contains the main function for the scanner. It initializes 
-         the scanner, reads the input file, and prints the tokens 
-         and lexemes.
+  @brief Contains the main function for the scanner, 
+         recursive descent and generates RPN code for 
+         successfully parsed input files
 ***************************************************************/
 
 #include "parser.hpp"
