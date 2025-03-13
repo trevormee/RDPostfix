@@ -45,7 +45,8 @@ void Parser::parse()
 */
 void Parser::error(const std::string& message)
 {
-    std::cout << ">>> Error: " << message << std::endl;
+    std::cout << ">>> Error line " << scanner.getLineNumber() << ": " << message << std::endl;
+    //std::cout << ">>> Error: " << message << std::endl;
     exit(1);
 }
 

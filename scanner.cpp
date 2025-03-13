@@ -74,7 +74,7 @@ const std::string Scanner::eoIToken = "end.";
     @brief parameterized constructor
     @param src the source code to be scanned
 */
-    Scanner::Scanner(const std::string& src) : source(src + Scanner::EOI) {
+    Scanner::Scanner(const std::string& src) : source(src + Scanner::EOI), lineNumber(1) {
         init();
     }
 
@@ -98,7 +98,7 @@ const std::string Scanner::eoIToken = "end.";
     @return N/A
 */
     void Scanner::error(const std::string & message) {
-        std::cout << ">>> Error: " << message << std::endl;
+        std::cout << ">>> Error at line " << getLineNumber() << ": " << message << std::endl;
     }
 
 
@@ -115,6 +115,9 @@ const std::string Scanner::eoIToken = "end.";
     @return N/A
 */
     void Scanner::move() {
+        if(currentCh() == '\n'){
+            lineNumber++;
+        }
         position += 1;
     }
 
@@ -552,4 +555,12 @@ const std::string Scanner::eoIToken = "end.";
         tok.value = std::monostate{};
 
         return tok;
+    }
+
+    /*
+        @brief gets the current line number
+        @return current line number
+    */
+    int Scanner::getLineNumber(){
+        return lineNumber;
     }
