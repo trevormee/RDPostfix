@@ -21,7 +21,7 @@ class Parser
 public:
     // public function declarations
     Parser(Scanner& scanner);
-    void parse();
+    void parse(const std::string& inputFileName);
 
 private:
     // private member variables
@@ -60,7 +60,7 @@ private:
     void Cond();
     void Loop();
     std::string Identifier();
-    void printRPN();
+    void printRPN(const std::string& outputFileName);
     void VarDeclarations();
 };
 #endif

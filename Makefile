@@ -27,7 +27,7 @@ $(TARGET): $(OBJS)
 
 # Clean up generated files
 clean:
-	rm -f $(OBJS) $(TARGET)
+	rm -f $(OBJS) $(TARGET) *.txt
 
 # Phony targets
 .PHONY: all clean

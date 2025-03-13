@@ -23,7 +23,7 @@ Parser::Parser(Scanner& scanner) : scanner(scanner), lastLabel(-1), IR() {
     @brief parses the input source code
     @return N/A
 */
-void Parser::parse() 
+void Parser::parse(const std::string& inputFileName) 
 {
     try{
         program();
@@ -31,7 +31,10 @@ void Parser::parse()
             error("Expected end. but found " + lookahead.type);
         }
         std::cout << "Successfully parsed!" << std::endl;
-        printRPN();
+
+        std::string outputFileName = inputFileName + ".txt";
+        printRPN(outputFileName);
+        
     }catch (const std::exception& e){
         std::cerr << "parsing error: " << e.what() << std::endl;
     }
@@ -354,17 +357,30 @@ std::string Parser::Identifier()
     @brief Writes the generated RPN to an output file
     @return N/A
 */
-void Parser::printRPN()
+void Parser::printRPN(const std::string& outputFileName)
 {
-    std::cout << "Printing RPN..." << std::endl;
-    for(const auto& x : IR)
-    {
+    std::ofstream outputFile(outputFileName);
+
+    for(const auto& x : IR){
         if(x.second.empty()){
-            std::cout << "['" << x.first << "']" << std::endl;
-        }else{
-            std::cout << "['" << x.first << ", '" << x.second << "']" << std::endl;
+            outputFile << "['" << x.first << "']" << std::endl;
+        }else {
+            outputFile << "['" << x.first << ", '" << x.second << "']" << std::endl;
         }
     }
+
+    outputFile.close();
+    std::cout << "Generated RPN code written to " << outputFileName << std::endl;
+
+    // std::cout << "Printing RPN..." << std::endl;
+    // for(const auto& x : IR)
+    // {
+    //     if(x.second.empty()){
+    //         std::cout << "['" << x.first << "']" << std::endl;
+    //     }else{
+    //         std::cout << "['" << x.first << ", '" << x.second << "']" << std::endl;
+    //     }
+    // }
 }
 
 
