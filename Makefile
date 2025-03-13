@@ -3,7 +3,7 @@ CXX = g++
 CXXFLAGS = -Wall 
 
 # Target executable
-TARGET = proj1
+TARGET = proj2
 
 # Source files
 SRCS = main.cpp scanner.cpp parser.cpp
