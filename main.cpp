@@ -37,7 +37,7 @@ int main(int argc, char* argv[]) {
     Parser parser(scanner);
 
     // Parse the source code
-    parser.parse();
+    parser.parse(argv[1]);
 
     return 0;
 }

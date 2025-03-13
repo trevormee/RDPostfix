@@ -53,11 +53,13 @@ public:
     std::string source;
     size_t position;           
     std::string currentText;   
-    std::string currentToken; 
-    
+    std::string currentToken;
+    int lineNumber;
+
     // function declarations
     Scanner(const std::string& src);
     void init();
+    int getLineNumber();
     Token nextToken();
     
 private:

@@ -3,7 +3,7 @@ CXX = g++
 CXXFLAGS = -Wall 
 
 # Target executable
-TARGET = proj1
+TARGET = proj2
 
 # Source files
 SRCS = main.cpp scanner.cpp parser.cpp
@@ -27,7 +27,7 @@ $(TARGET): $(OBJS)
 
 # Clean up generated files
 clean:
-	rm -f $(OBJS) $(TARGET)
+	rm -f $(OBJS) $(TARGET) *.txt
 
 # Phony targets
 .PHONY: all clean
