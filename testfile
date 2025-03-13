@@ -1,5 +1,0 @@
-begin
-  var x, y, z;
-  x = y + z;
-  z = x - 5;
-end.
