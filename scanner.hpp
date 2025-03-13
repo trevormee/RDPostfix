@@ -1,7 +1,7 @@
 /***************************************************************
  *  Student Name: Trevor Mee
  *  File Name: scanner.hpp
- *  Project 1
+ *  Project 2
  * 
  *  @brief This file defines the structures and functions for a 
  *         scanner.
