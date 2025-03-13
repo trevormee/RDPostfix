@@ -48,7 +48,6 @@ private:
     void expression();
     void term();
     void factor();
-    void printIdentifiers();
     std::string newLabel();
     void emit(const std::string& tag, const std::string& item );
     void scan();
