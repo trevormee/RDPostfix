@@ -32,7 +32,7 @@ void Parser::parse(const std::string& inputFileName)
         if (lookahead.type != "endSym") {
             error("Expected end. but found " + lookahead.type);
         }
-        std::cout << "Success!" << std::endl;
+        std::cout << "Success! The program is legal!" << std::endl;
 
         std::string outputFileName = inputFileName + ".txt";
         printRPN(outputFileName);
