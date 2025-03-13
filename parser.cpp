@@ -46,7 +46,6 @@ void Parser::parse()
 void Parser::error(const std::string& message)
 {
     std::cout << ">>> Error line " << scanner.getLineNumber() << ": " << message << std::endl;
-    //std::cout << ">>> Error: " << message << std::endl;
     exit(1);
 }
 
@@ -174,9 +173,6 @@ void Parser::factor()
         }
         std::string id = std::get<std::string>(lookahead.value);
         
-        // Debug: Print the identifier value
-        //std::cout << "DEBUG: Identifier value = " << id << std::endl;
-        
         if (symbolTable.find(id) == symbolTable.end()) {
             error("Undefined variable " + id);
         }
@@ -249,7 +245,6 @@ void Parser::emit(const std::string& tag, const std::string& item = "")
 void Parser::scan()
 {
     lookahead = scanner.nextToken();
-    //std::cout << "Scanned token: " << lookahead.type << std::endl;
 }
 
 /*

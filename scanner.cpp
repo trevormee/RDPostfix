@@ -111,7 +111,9 @@ const std::string Scanner::eoIToken = "end.";
     }
 
 /*
-    @brief moves the scanner to the next character in the source code
+    @brief moves the scanner to the next character in the 
+           input file & increments line number when a new 
+           line occurs
     @return N/A
 */
     void Scanner::move() {
@@ -282,26 +284,10 @@ const std::string Scanner::eoIToken = "end.";
     @brief Skip over digits
     @return the token of type numConstant
 */
-    // Token Scanner::NUM() {
-    //     std::string numStr = skipStar(Scanner::DIGITS);
-    
-    //     if (Scanner::LETTERS.find(currentCh()) != Scanner::LETTERS.end()) {
-    //         error("Invalid number format: Numbers cannot be followed by letters.");
-    //         Token tok;
-    //         tok.type = "error";
-    //         tok.value = std::monostate{};
-    //         return tok;
-    //     }
-    
-    //     Token tok;
-    //     tok.type = "numConstant";
-    //     tok.value = std::stoi(numStr);
-    //     return tok;
-    // }
     Token Scanner::NUM() {
         std::string numStr = skipStar(Scanner::DIGITS);
-    
-        // Ensure numbers are not followed by letters
+        
+        // ensure a number does not contain a letter
         if (Scanner::LETTERS.find(currentCh()) != Scanner::LETTERS.end()) {
             error("Invalid number format: Numbers cannot be followed by letters.");
             Token tok;
@@ -310,10 +296,9 @@ const std::string Scanner::eoIToken = "end.";
             return tok;
         }
     
-        // Create and return the token
         Token tok;
         tok.type = "numConstant";
-        tok.value = std::stoi(numStr); // Ensure value is set as an int
+        tok.value = std::stoi(numStr);
         return tok;
     }
     
@@ -322,58 +307,10 @@ const std::string Scanner::eoIToken = "end.";
     @brief determines if current token is an identifier
     @return the token of type identifier
 */
-    // Token Scanner::ID() {
-    //     std::string idStr;
-
-    //     if (Scanner::LETTERS.find(currentCh()) == Scanner::LETTERS.end()) {
-    //         error("Identifier must start with a letter.");
-    //         Token tok;
-    //         tok.type = "error";
-    //         tok.value = std::monostate{};
-    //         return tok;
-    //     }
-    
-    //     idStr += currentCh();
-    //     eat();
-        
-    //     bool lastWasUnderscore = false;
-    
-    //     while (Scanner::LETTERS_OR_DIGITS.find(currentCh()) != Scanner::LETTERS_OR_DIGITS.end()) {
-    //         if (currentCh() == '_') {
-    //             if (lastWasUnderscore) {  
-    //                 error("Identifier cannot have consecutive underscores.");
-    //                 Token tok;
-    //                 tok.type = "error";
-    //                 tok.value = std::monostate{};
-    //                 return tok;
-    //             }
-    //             lastWasUnderscore = true;
-    //         } else {
-    //             lastWasUnderscore = false;
-    //         }
-    
-    //         idStr += currentCh();
-    //         eat();
-    //     }
-    
-    //     if (idStr.back() == '_') {
-    //         error("Identifier cannot end with an underscore.");
-    //         Token tok;
-    //         tok.type = "error";
-    //         tok.value = std::monostate{};
-    //         return tok;
-    //     }
-    
-    //     Token tok;
-    //     tok.type = "identifier";
-    //     tok.value = idStr;
-    //     return tok;
-    // }
-
     Token Scanner::ID() {
         std::string idStr;
-    
-        // Ensure the identifier starts with a letter
+        
+        // ensure that an identifier starts with a letter
         if (Scanner::LETTERS.find(currentCh()) == Scanner::LETTERS.end()) {
             error("Identifier must start with a letter.");
             Token tok;
@@ -382,11 +319,10 @@ const std::string Scanner::eoIToken = "end.";
             return tok;
         }
     
-        // Add the first character to the identifier string
         idStr += currentCh();
         eat();
-    
-        // Process the remaining characters
+        
+        // ensure that an identifier does not contain consecutive underscores
         bool lastWasUnderscore = false;
         while (Scanner::LETTERS_OR_DIGITS.find(currentCh()) != Scanner::LETTERS_OR_DIGITS.end()) {
             if (currentCh() == '_') {
@@ -405,8 +341,8 @@ const std::string Scanner::eoIToken = "end.";
             idStr += currentCh();
             eat();
         }
-    
-        // Ensure the identifier does not end with an underscore
+        
+        // ensure an identifier does not end with an underscore
         if (idStr.back() == '_') {
             error("Identifier cannot end with an underscore.");
             Token tok;
@@ -415,26 +351,21 @@ const std::string Scanner::eoIToken = "end.";
             return tok;
         }
     
-        // Debug: Print the identifier string
-        std::cout << "DEBUG: Scanned word = " << idStr << std::endl;
-    
         // Check if the scanned word is a keyword
         if (KEYWORD_TABLE.find(idStr) != KEYWORD_TABLE.end()) {
-            // Return a keyword token
             Token tok;
-            tok.type = KEYWORD_TABLE.at(idStr); // Set the token type from the keyword table
-            tok.value = std::monostate{};      // Keywords have no value
-            std::cout << "DEBUG: Keyword detected: " << idStr << " -> " << tok.type << std::endl;
+            tok.type = KEYWORD_TABLE.at(idStr); 
+            tok.value = std::monostate{};      
             return tok;
         } else {
-            // Return an identifier token
             Token tok;
             tok.type = "identifier";
-            tok.value = idStr; // Set the value to the identifier string
-            std::cout << "DEBUG: Identifier detected: " << idStr << std::endl;
+            tok.value = idStr; 
             return tok;
         }
     }
+
+
 /*
     @brief Skip over everything up to end of string
     @return string scanned
@@ -497,21 +428,8 @@ const std::string Scanner::eoIToken = "end.";
         if (c == Scanner::START_STRING) {
             return STR();
         }
-        // tmee
-        // if (Scanner::LETTERS.find(c) != Scanner::LETTERS.end()) {
-        //     Token idToken = ID();
-        //     std::string idStr = std::get<std::string>(idToken.value);
-        //     if (Scanner::KEYWORD_TABLE.find(idStr) != Scanner::KEYWORD_TABLE.end()) {
-        //         Token tok;
-        //         tok.type = Scanner::KEYWORD_TABLE.at(idStr);
-        //         tok.value = std::monostate{};
-        //         return tok;      
-        //     } else {
-        //         return idToken;  
-        //     }
-        // }
         if (Scanner::LETTERS.find(c) != Scanner::LETTERS.end()) {
-            return ID(); // Call ID() to handle identifiers and keywords
+            return ID(); 
         }
 
         // Two-char tokens: ==, !=, >=, <=
